@@ -51,4 +51,4 @@ const useFetch = ( endpoint, query ) => {
       
 }
 
-export default useFetch();
+export default useFetch;
