@@ -27,11 +27,12 @@ const Home = () => {
                     <Welcome/>
                     <Popularjobs/>
                     <Nearbyjobs/>
-
                 </View>
              </ScrollView>
         </SafeAreaView>
      )
 }
+
+
 
 export default Home;

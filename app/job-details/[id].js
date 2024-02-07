@@ -8,6 +8,8 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, specifics } fro
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
 
+const tabs = ["About", "Qualifications", "Responsibilities"];
+
 const JobDetails = () => {
     const params = useGlobalSearchParams();
     const router = useRouter();
@@ -15,6 +17,7 @@ const JobDetails = () => {
     const {data, isLoading, error, refetch } = useFetch('job-details', { job_id: params.id})
 
     const [refreshing, setRefreshing] = useState(false);
+    const [activeTab, setActiveTab] = useState(tabs[0]);
 
     const onRefresh = () => {}
 
@@ -45,7 +48,7 @@ const JobDetails = () => {
             <>
             <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 {isLoading ? (
-                    <ActivityIndicator size="large" color={COLORS.primary}/>
+                    <ActivityIndicator size="large" color={COLORS.primary}/> 
                 ): error? (
                     <Text>Something went wrong</Text>
                 ): data.length === 0 ? (
@@ -58,7 +61,11 @@ const JobDetails = () => {
                             companyName={data[0].employer_name}
                             Location={data[0].job_country}
                         />
-                        <JobTabs/>
+                        <JobTabs
+                        tabs = {tabs}
+                        activeTab = {activeTab}
+                        setActiveTab = {setActiveTab}
+                        />
                     </View>
                 )}
 
